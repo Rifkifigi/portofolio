@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Rifki Figianto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+      }
+    
+      :root {
+        --bg: #06060c;
+        --surface: #0d0d18;
+        --surface2: #13132a;
+        --gold: #c9a84c;
+        --gold-dim: #8a6f2e;
+        --gold-glow: rgba(201, 168, 76, 0.12);
+        --text: #e8e8f0;
+        --text-dim: #8888aa;
+        --border: rgba(201, 168, 76, 0.15);
+        --border-hover: rgba(201, 168, 76, 0.35);
+        --font-display: 'Cormorant Garamond', serif;
+        --font-body: 'Outfit', sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+      }
+    
+      html {
+        scroll-behavior: smooth
+      }
+    
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        font-weight: 300;
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+    
+      ::-webkit-scrollbar {
+        width: 4px
+      }
+    
+      ::-webkit-scrollbar-track {
+        background: var(--bg)
+      }
+    
+      ::-webkit-scrollbar-thumb {
+        background: var(--gold-dim);
+        border-radius: 2px
+      }
+    
+      /* Cursor */
+      .cursor {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--gold);
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+      }
+    
+      .cursor-ring {
+        position: fixed;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--gold);
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: transform 0.15s ease-out;
+        opacity: 0.5;
+      }
+    
+      /* Navbar */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 4rem;
+        transition: all 0.3s;
+      }
+    
+      nav.scrolled {
+        background: rgba(6, 6, 12, 0.9);
+        backdrop-filter: blur(12px);
+        padding: 1rem 4rem;
+        border-bottom: 1px solid var(--border);
+      }
+    
+      .nav-logo {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        font-weight: 600;
+        color: var(--gold);
+        text-decoration: none;
+      }
+    
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none
+      }
+    
+      .nav-links a {
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+    
+      .nav-links a:hover {
+        color: var(--gold)
+      }
+    
+      /* Hero */
+      #hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        padding: 8rem 4rem 4rem;
+        position: relative;
+      }
+    
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 60% 60% at 70% 50%, rgba(201, 168, 76, 0.04) 0%, transparent 70%);
+        pointer-events: none;
+      }
+    
+      .grid-overlay {
+        position: absolute;
+        inset: 0;
+        opacity: 0.025;
+        background-image: linear-gradient(var(--gold) 1px, transparent 1px),
+          linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+        background-size: 60px 60px;
+        pointer-events: none;
+      }
+    
+      .hero-content {
+        max-width: 860px;
+        position: relative
+      }
+    
+      .hero-eyebrow {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--gold);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+    
+      .hero-eyebrow::before {
+        content: '';
+        width: 2rem;
+        height: 1px;
+        background: var(--gold)
+      }
+    
+      .hero-title {
+        font-family: var(--font-display);
+        font-size: clamp(3.5rem, 8vw, 7rem);
+        font-weight: 300;
+        line-height: 1.05;
+        margin-bottom: 1rem;
+      }
+    
+      .hero-title em {
+        font-style: italic;
+        color: var(--gold)
+      }
+    
+      .hero-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-dim);
+        max-width: 520px;
+        margin-bottom: 2.5rem;
+      }
+    
+      .hero-typing {
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        color: var(--gold);
+        margin-bottom: 3rem;
+      }
+    
+      .hero-cta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+    
+      /* Buttons */
+      .btn {
+        padding: 0.75rem 1.8rem;
+        font-size: 0.8rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-family: var(--font-body);
+        border: none;
+      }
+    
+      .btn-primary {
+        background: var(--gold);
+        color: #06060c;
+      }
+    
+      .btn-primary:hover {
+        background: #e8c56d;
+        transform: translateY(-2px);
+      }
+    
+      .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border-hover);
+      }
+    
+      .btn-outline:hover {
+        border-color: var(--gold);
+        color: var(--gold);
+      }
+    
+      /* Sections */
+      section {
+        padding: 6rem 4rem;
+        position: relative
+      }
+    
+      .section-header {
+        margin-bottom: 4rem
+      }
+    
+      .section-tag {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--gold);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+    
+      .section-tag::before {
+        content: '';
+        width: 1.5rem;
+        height: 1px;
+        background: var(--gold)
+      }
+    
+      .section-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.2rem, 4vw, 3.5rem);
+        font-weight: 300;
+      }
+    
+      .section-title em {
+        font-style: italic;
+        color: var(--gold)
+      }
+    
+      .gold-line {
+        width: 3rem;
+        height: 1px;
+        background: var(--gold);
+        margin-top: 1rem
+      }
+    
+      /* About */
+      #about {
+        background: var(--surface)
+      }
+    
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6rem;
+        align-items: center
+      }
+    
+      .about-photo-placeholder{
+        aspect-ratio:4/5;
+        overflow:hidden;
+        border:1px solid var(--border);
+        background:var(--surface2);
+      }
+
+      .about-photo-placeholder img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        display:block;
+      }
+    
+      .photo-icon {
+        font-size: 5rem;
+        opacity: 0.15
+      }
+    
+      .about-tag {
+        background: var(--gold);
+        color: #06060c;
+        padding: 1.2rem 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        margin-top: 1rem;
+      }
+    
+      .about-text p {
+        color: var(--text-dim);
+        margin-bottom: 1.5rem;
+        line-height: 1.9
+      }
+    
+      .about-stats {
+        display: flex;
+        gap: 2.5rem;
+        margin-top: 2.5rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid var(--border)
+      }
+    
+      .stat-num {
+        font-family: var(--font-display);
+        font-size: 2.8rem;
+        color: var(--gold);
+        display: block;
+        line-height: 1
+      }
+    
+      .stat-label {
+        font-size: 0.75rem;
+        color: var(--text-dim)
+      }
+    
+      /* Skills */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem
+      }
+    
+      .skill-category {
+        border: 1px solid var(--border);
+        padding: 2rem;
+        background: var(--surface);
+        transition: all 0.3s;
+      }
+    
+      .skill-category:hover {
+        border-color: var(--gold);
+        background: var(--surface2)
+      }
+    
+      .skill-cat-title {
+        font-size: 0.75rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.5rem;
+        font-family: var(--font-mono);
+      }
+    
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem
+      }
+    
+      .skill-tag {
+        padding: 0.35rem 0.8rem;
+        border: 1px solid var(--border);
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--text-dim);
+      }
+    
+      .skill-tag:hover {
+        border-color: var(--gold);
+        color: var(--gold)
+      }
+    
+      /* Portfolio */
+      #portfolio {
+        background: var(--surface)
+      }
+    
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 1.5rem
+      }
+    
+      .project-card {
+        border: 1px solid var(--border);
+        background: var(--bg);
+        overflow: hidden;
+        transition: all 0.3s;
+      }
+    
+      .project-card:hover {
+        border-color: var(--gold);
+        transform: translateY(-4px)
+      }
+    
+      /* === PERUBAHAN UTAMA: project-thumb dengan efek zoom === */
+      .project-thumb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        background: var(--surface2);
+        border-bottom: 1px solid var(--border);
+      }
+    
+      .project-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.4s ease;
+      }
+    
+      .project-card:hover .project-thumb img {
+        transform: scale(1.05);
+      }
+    
+      .project-body {
+        padding: 1.5rem
+      }
+    
+      .project-num {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        color: var(--gold);
+        margin-bottom: 0.8rem
+      }
+    
+      .project-title {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 0.8rem
+      }
+    
+      .project-desc {
+        font-size: 0.88rem;
+        color: var(--text-dim);
+        margin-bottom: 1.5rem
+      }
+    
+      .project-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem
+      }
+    
+      .project-tech {
+        font-family: var(--font-mono);
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+        background: var(--gold-glow);
+        border: 1px solid var(--gold-dim);
+        color: var(--gold);
+      }
+    
+      .project-link {
+        float: right;
+        color: var(--text-dim);
+        text-decoration: none;
+        font-size: 1rem;
+      }
+    
+      .project-link:hover {
+        color: var(--gold)
+      }
+    
+      /* Certificates */
+      .cert-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.2rem
+      }
+    
+      .cert-card {
+        border: 1px solid var(--border);
+        background: var(--bg);
+        padding: 1.5rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.2rem;
+        transition: all 0.3s;
+        text-decoration: none;
+        color: inherit;
+      }
+    
+      .cert-card:hover {
+        border-color: var(--gold);
+        transform: translateY(-3px)
+      }
+    
+      .cert-icon {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        background: var(--gold-glow);
+        color: var(--gold);
+      }
+    
+      .cert-issuer {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--gold);
+        margin-bottom: 0.4rem
+      }
+    
+      .cert-name {
+        font-size: 0.95rem;
+        font-weight: 400;
+        margin-bottom: 0.5rem
+      }
+    
+      .cert-meta {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap
+      }
+    
+      .cert-date {
+        font-family: var(--font-mono);
+        font-size: 0.68rem;
+        color: var(--text-dim)
+      }
+    
+      .cert-badge {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        padding: 0.2rem 0.55rem;
+        background: var(--gold-glow);
+        border: 1px solid var(--gold-dim);
+        color: var(--gold);
+      }
+    
+      /* Contact */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+        gap: 6rem;
+        align-items: start
+      }
+    
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem
+      }
+    
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+        color: var(--text-dim);
+        text-decoration: none;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+    
+      .contact-link:hover {
+        color: var(--gold);
+        padding-left: 0.5rem
+      }
+    
+      .contact-link-icon {
+        color: var(--gold);
+        width: 1.2rem
+      }
+    
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem
+      }
+    
+      .form-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 0.6rem;
+        display: block;
+        font-family: var(--font-mono);
+      }
+    
+      .form-input {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.9rem 1rem;
+        font-family: var(--font-body);
+        font-size: 0.95rem;
+        outline: none;
+      }
+    
+      .form-input:focus {
+        border-color: var(--gold);
+        background: var(--surface2)
+      }
+    
+      .form-success {
+        display: none;
+        padding: 1rem;
+        background: var(--gold-glow);
+        border: 1px solid var(--gold-dim);
+        color: var(--gold);
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+      }
+    
+      /* Footer */
+      footer {
+        padding: 3rem 4rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        font-family: var(--font-mono);
+        font-size: 0.72rem;
+        color: var(--text-dim);
+      }
+    
+      /* Reveal Animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(32px);
+        transition: all 0.7s
+      }
+    
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    
+      /* Chatbot */
+      .chat-fab {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 500;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--gold);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        box-shadow: 0 4px 24px rgba(201, 168, 76, 0.35);
+        transition: transform 0.2s;
+      }
+    
+      .chat-fab:hover {
+        transform: scale(1.08);
+      }
+    
+      .chat-fab.open {
+        background: var(--surface2);
+        border: 1px solid var(--border-hover);
+      }
+    
+      .chat-window {
+        position: fixed;
+        bottom: 5.5rem;
+        right: 2rem;
+        z-index: 500;
+        width: 380px;
+        height: 560px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        transform: scale(0.9) translateY(16px);
+        transform-origin: bottom right;
+        opacity: 0;
+        pointer-events: none;
+        transition: transform 0.25s, opacity 0.25s;
+      }
+    
+      .chat-window.open {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+    
+      .chat-header {
+        padding: 1rem 1.2rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+    
+      .chat-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        color: #06060c;
+      }
+    
+      .chat-header-info {
+        flex: 1
+      }
+    
+      .chat-header-name {
+        font-size: 0.9rem;
+        font-weight: 500
+      }
+    
+      .chat-header-status {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--gold);
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+    
+      .chat-header-status::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: pulse-dot 2s infinite;
+      }
+    
+      @keyframes pulse-dot {
+    
+        0%,
+        100% {
+          opacity: 1
+        }
+    
+        50% {
+          opacity: 0.3
+        }
+      }
+    
+      .chat-close {
+        background: none;
+        border: none;
+        color: var(--text-dim);
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+    
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1.2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        scrollbar-width: thin;
+      }
+    
+      .msg {
+        max-width: 85%;
+        animation: msgIn 0.25s ease;
+      }
+    
+      @keyframes msgIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px)
+        }
+    
+        to {
+          opacity: 1;
+          transform: translateY(0)
+        }
+      }
+    
+      .msg-bot {
+        align-self: flex-start
+      }
+    
+      .msg-user {
+        align-self: flex-end
+      }
+    
+      .msg-bubble {
+        padding: 0.7rem 1rem;
+        font-size: 0.85rem;
+        line-height: 1.5;
+      }
+    
+      .msg-bot .msg-bubble {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-top-left-radius: 0;
+      }
+    
+      .msg-user .msg-bubble {
+        background: var(--gold);
+        color: #06060c;
+        font-weight: 400;
+        border-top-right-radius: 0;
+      }
+    
+      .msg-time {
+        font-family: var(--font-mono);
+        font-size: 0.6rem;
+        color: var(--text-dim);
+        margin-top: 0.3rem;
+      }
+    
+      .msg-user .msg-time {
+        text-align: right
+      }
+    
+      .msg-typing .msg-bubble {
+        padding: 0.7rem 1rem
+      }
+    
+      .typing-dots {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+      }
+    
+      .typing-dots span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--text-dim);
+        animation: dot 1.2s infinite;
+      }
+    
+      .typing-dots span:nth-child(2) {
+        animation-delay: 0.2s
+      }
+    
+      .typing-dots span:nth-child(3) {
+        animation-delay: 0.4s
+      }
+    
+      @keyframes dot {
+    
+        0%,
+        80%,
+        100% {
+          transform: scale(0.6);
+          opacity: 0.4
+        }
+    
+        40% {
+          transform: scale(1);
+          opacity: 1
+        }
+      }
+    
+      .chat-suggestions {
+        padding: 0.6rem 1.2rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        border-top: 1px solid var(--border);
+      }
+    
+      .suggestion-chip {
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        color: var(--gold);
+        border: 1px solid var(--border-hover);
+        background: none;
+        cursor: pointer;
+        padding: 0.3rem 0.7rem;
+        transition: all 0.2s;
+      }
+    
+      .suggestion-chip:hover {
+        background: var(--gold-glow);
+        border-color: var(--gold);
+      }
+    
+      .chat-input-wrap {
+        padding: 0.8rem 1rem;
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 0.6rem;
+        align-items: flex-end;
+      }
+    
+      .chat-input {
+        flex: 1;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.6rem 0.9rem;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        outline: none;
+        resize: none;
+        max-height: 100px;
+      }
+    
+      .chat-input:focus {
+        border-color: var(--gold)
+      }
+    
+      .chat-send {
+        width: 36px;
+        height: 36px;
+        background: var(--gold);
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.9rem;
+        color: #06060c;
+        transition: background 0.2s;
+      }
+    
+      .chat-send:hover {
+        background: #e8c56d
+      }
+    
+      .chat-send:disabled {
+        opacity: 0.4;
+        cursor: not-allowed
+      }
+    
+      @media(max-width:768px) {
+        nav {
+          padding: 1.2rem 1.5rem
+        }
+    
+        .nav-links {
+          display: none
+        }
+    
+        section,
+        #hero {
+          padding: 5rem 1.5rem
+        }
+    
+        .about-grid,
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 3rem
+        }
+    
+        .projects-grid {
+          grid-template-columns: 1fr
+        }
+    
+        footer {
+          flex-direction: column;
+          text-align: center;
+          gap: 1rem;
+          padding: 2rem 1.5rem
+        }
+    
+        .chat-window {
+          width: 90vw;
+          right: 5vw;
+          bottom: 5rem;
+          height: 500px
+        }
+      }
+
+      #music-toggle{
+        position:fixed;
+        bottom:2rem;
+        left:2rem;
+        width:52px;
+        height:52px;
+        border:none;
+        border-radius:50%;
+        background:var(--gold);
+        color:#06060c;
+        font-size:1.2rem;
+        cursor:pointer;
+        z-index:999;
+        box-shadow:0 4px 20px rgba(201,168,76,.3);
+        transition:.3s;
+      }
+
+      #music-toggle:hover{
+        transform:scale(1.08);
+      }
+    </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "@supabase/supabase-js": "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+      }
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">Dev.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#portfolio">Proyek</a></li>
+      <li><a href="#certificates">Sertifikat</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Available for work</div>
+      <h1 class="hero-title">Halo, saya Rifki Figianto<br><em>Web Developer</em></h1>
+      <p class="hero-subtitle">Membangun pengalaman web yang elegan, fungsional, dan penuh detail. Dari konsep hingga
+        kode — dengan presisi dan keindahan.</p>
+      <div class="hero-typing"><span id="typed-text"></span></div>
+      <div class="hero-cta">
+        <a href="#portfolio" class="btn btn-primary">Lihat Proyek</a>
+        <a href="#" class="btn btn-outline" id="download-cv" download>⬇ Download CV</a>
+      </div>
+    </div>
+  </section>
+
+<section id="about">
+  <div class="about-grid">
+
+    <div class="about-image-wrap reveal">
+
+      <div class="about-photo-placeholder">
+        <img src="fotoku.jpg" alt="Rifki Figianto">
+      </div>
+
+      <div class="about-tag">
+        Banjarnegara, Indonesia<br>
+        Open to Remote Work
+      </div>
+
+    </div>
+
+    <div class="about-text reveal">
+      <div class="section-header">
+        <div class="section-tag">Tentang saya</div>
+
+        <h2 class="section-title">
+          Kode adalah <em>seni</em>,<br>
+          bukan sekadar logika.
+        </h2>
+
+        <div class="gold-line"></div>
+      </div>
+
+      <p>
+        Saya adalah seorang web developer yang bersemangat dalam menciptakan aplikasi web yang tidak hanya berfungsi
+        dengan baik, tetapi juga memberikan pengalaman pengguna yang luar biasa.
+      </p>
+
+      <p>
+        Dengan fokus pada clean code, performa tinggi, dan desain yang intuitif, saya menggabungkan keahlian teknis
+        dengan kepekaan estetis untuk menghasilkan produk digital yang benar-benar berkesan.
+      </p>
+
+      <div class="about-stats">
+
+        <div>
+          <span class="stat-num" id="stat-years">2+</span>
+          <div class="stat-label">Tahun Pengalaman</div>
+        </div>
+
+        <div>
+          <span class="stat-num" id="stat-projects">0</span>
+          <div class="stat-label">Proyek Selesai</div>
+        </div>
+
+        <div>
+          <span class="stat-num" id="stat-certs">0</span>
+          <div class="stat-label">Sertifikat</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+  <section id="skills">
+    <div class="section-header reveal">
+      <div class="section-tag">Keahlian</div>
+      <h2 class="section-title">Tech Stack &amp; <em>Kemampuan</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="skills-grid" id="skills-grid"></div>
+  </section>
+
+  <section id="portfolio">
+    <div class="section-header reveal">
+      <div class="section-tag">Portofolio</div>
+      <h2 class="section-title">Proyek <em>Pilihan</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="projects-grid" id="projects-grid">
+      <div class="loading" style="text-align:center;padding:2rem">Memuat proyek...</div>
+    </div>
+  </section>
+
+  <section id="certificates">
+    <div class="section-header reveal">
+      <div class="section-tag">Sertifikasi</div>
+      <h2 class="section-title">Lisensi &amp; <em>Sertifikat</em></h2>
+      <div class="gold-line"></div>
+    </div>
+    <div class="cert-grid" id="cert-grid">
+      <div class="loading" style="text-align:center;padding:2rem">Memuat sertifikat...</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="section-header">
+          <div class="section-tag">Kontak</div>
+          <h2 class="section-title">Mulai <em>Kolaborasi</em></h2>
+          <div class="gold-line"></div>
+        </div>
+        <p class="contact-desc">Ada proyek menarik? Butuh developer handal? Saya siap berdiskusi dan mewujudkan ide Anda
+          menjadi kenyataan.</p>
+        <div class="contact-links">
+          <a href="mailto:rifkifigianto1@gmail.com" class="contact-link"><span class="contact-link-icon">✉</span>
+            rifkifigianto1@gmail.com</a>
+          <a href="https://wa.me/6287872715783" class="contact-link" target="_blank"><span
+              class="contact-link-icon">✆</span> +62 878-7271-5783</a>
+          <a href="https://github.com/Rifkifigi" class="contact-link" target="_blank"><span
+              class="contact-link-icon">⊙</span> github.com/Rifkifigi</a>
+          <a href="https://linkedin.com/in/rifkifigianto" class="contact-link" target="_blank"><span
+              class="contact-link-icon">in</span> linkedin.com/in/rifkifigianto</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <form class="contact-form" id="contact-form" onsubmit="submitForm(event)">
+          <div class="form-group"><label class="form-label">Nama Lengkap</label><input type="text" class="form-input"
+              required></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input"
+              required></div>
+          <div class="form-group"><label class="form-label">Subjek</label><input type="text" class="form-input"
+              required></div>
+          <div class="form-group"><label class="form-label">Pesan</label><textarea class="form-input" rows="4"
+              required></textarea></div>
+          <div class="form-success" id="form-success">✓ Pesan terkirim! Saya akan menghubungi Anda segera.</div>
+          <button type="submit" class="btn btn-primary form-btn">Kirim Pesan</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <audio id="bg-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  
+  <button id="music-toggle">
+    🎵
+  </button>
+
+  <footer>
+    <span class="footer-logo">Dev.</span>
+    <span>© 2026 — Crafted with precision</span>
+    <span>Banjarnegara, Indonesia</span>
+  </footer>
+
+  <!-- CHATBOT COMPONENT -->
+  <button class="chat-fab" id="chat-fab" title="Chat dengan AI Assistant">💬</button>
+  <div class="chat-window" id="chat-window">
+    <div class="chat-header">
+      <div class="chat-avatar">🤖</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">Dev Assistant</div>
+        <div class="chat-header-status">Online · Siap membantu</div>
+      </div>
+      <button class="chat-close" id="chat-close">✕</button>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg msg-bot">
+        <div class="msg-bubble">Halo! 👋 Saya asisten AI dari portfolio ini. Tanyakan apa saja tentang pengalaman,
+          skill, atau proyek developer ini!</div>
+        <div class="msg-time">Sekarang</div>
+      </div>
+    </div>
+    <div class="chat-suggestions" id="chat-suggestions">
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Apa keahliannya?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Proyek terbaiknya?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Bisa freelance?</button>
+      <button class="suggestion-chip" onclick="sendSuggestion(this)">Cara kontaknya?</button>
+    </div>
+    <div class="chat-input-wrap">
+      <textarea class="chat-input" id="chat-input" placeholder="Ketik pertanyaanmu..." rows="1"></textarea>
+      <button class="chat-send" id="chat-send" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { createClient } from '@supabase/supabase-js'
+
+    const SUPABASE_URL = 'https://xmtbqkrwfvjumbsukwpg.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhtdGJxa3J3ZnZqdW1ic3Vrd3BnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgyMTYwNDAsImV4cCI6MjA5Mzc5MjA0MH0.q-lwmuHnDzMWkKud9Ux5fwdd_Zaq9lTuHsdSWgQQvJE'
+
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    const skillsData = [
+      { category: "Frontend", skills: ["HTML5", "CSS3", "JavaScript", "TypeScript", "React.js", "Vue.js", "Next.js", "Tailwind CSS"] },
+      { category: "Backend", skills: ["Node.js", "Express.js", "PHP", "Laravel", "Python", "REST API", "GraphQL"] },
+      { category: "Database & DevOps", skills: ["MySQL", "PostgreSQL", "MongoDB", "Redis", "Docker", "Git", "Linux"] },
+      { category: "Tools & Lainnya", skills: ["Figma", "VS Code", "Postman", "Vercel", "Firebase", "Webpack", "Vite"] }
+    ]
+
+    function renderSkills() {
+      const container = document.getElementById('skills-grid')
+      container.innerHTML = skillsData.map(cat => `
+        <div class="skill-category reveal">
+          <div class="skill-cat-title">${cat.category}</div>
+          <div class="skill-tags">${cat.skills.map(s => `<span class="skill-tag">${s}</span>`).join('')}</div>
+        </div>
+      `).join('')
+    }
+
+    async function loadProjects() {
+      const { data, error } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
+      if (error) { console.error(error); return [] }
+      return data
+    }
+
+    async function renderProjects() {
+      const container = document.getElementById('projects-grid')
+      const projects = await loadProjects()
+      document.getElementById('stat-projects').innerText = projects.length
+      if (!projects.length) {
+        container.innerHTML = '<div class="empty-state" style="text-align:center;padding:2rem;color:var(--text-dim)">Belum ada proyek yang ditampilkan.</div>'
+        return
+      }
+      container.innerHTML = projects.map((proj, idx) => `
+  <div class="project-card reveal">
+
+    <div class="project-thumb">
+      ${proj.thumbnail_url
+          ? `<img src="${proj.thumbnail_url}" alt="${escapeHtml(proj.title)}">`
+          : '🖥️'
+        }
+    </div>
+
+    ${proj.url
+          ? `<a href="${proj.url}" target="_blank" class="project-link">↗</a>`
+          : ''}
+
+    <div class="project-body">
+      <div class="project-num">
+        ${String(idx + 1).padStart(2, '0')} — ${proj.year || '2024'}
+      </div>
+
+      <h3 class="project-title">
+        ${escapeHtml(proj.title)}
+      </h3>
+
+      <p class="project-desc">
+        ${escapeHtml(
+            proj.description || 'Deskripsi proyek belum tersedia.'
+          )}
+      </p>
+
+      <div class="project-stack">
+        ${(proj.tech_stack || [])
+          .map(
+            t => `
+              <span class="project-tech">
+                ${escapeHtml(t)}
+              </span>
+            `
+          )
+          .join('')}
+      </div>
+    </div>
+  </div>
+`).join('')
+    }
+
+    async function loadCertificates() {
+      const { data, error } = await supabase.from('certificates').select('*').order('created_at', { ascending: false })
+      if (error) { console.error(error); return [] }
+      return data
+    }
+
+    async function renderCertificates() {
+      const container = document.getElementById('cert-grid')
+      const certs = await loadCertificates()
+      document.getElementById('stat-certs').innerText = certs.length
+      if (!certs.length) {
+        container.innerHTML = '<div class="empty-state" style="text-align:center;padding:2rem;color:var(--text-dim)">Belum ada sertifikat yang ditampilkan.</div>'
+        return
+      }
+      container.innerHTML = certs.map(cert => `
+        <a href="${cert.file_url || '#'}" class="cert-card reveal" target="${cert.file_url ? '_blank' : '_self'}">
+          <div class="cert-icon">${cert.icon || '🏅'}</div>
+          <div class="cert-body">
+            <div class="cert-issuer">${escapeHtml(cert.issuer)}</div>
+            <div class="cert-name">${escapeHtml(cert.name)}</div>
+            <div class="cert-meta">
+              <span class="cert-date">${formatDate(cert.date)}</span>
+              ${cert.badge ? `<span class="cert-badge">${escapeHtml(cert.badge)}</span>` : ''}
+            </div>
+          </div>
+          <span class="cert-link-icon">↗</span>
+        </a>
+      `).join('')
+    }
+
+    async function loadLatestCV() {
+      const { data, error } = await supabase.from('cv_files').select('*').order('uploaded_at', { ascending: false }).limit(1)
+      if (!error && data && data.length > 0) {
+        const cvLink = document.getElementById('download-cv')
+        cvLink.href = data[0].file_url
+        cvLink.download = data[0].filename
+      }
+    }
+
+    function escapeHtml(str) {
+      if (!str) return ''
+      return str.replace(/[&<>]/g, function (m) {
+        if (m === '&') return '&amp;'
+        if (m === '<') return '&lt;'
+        if (m === '>') return '&gt;'
+        return m
+      })
+    }
+
+    function formatDate(dateStr) {
+      if (!dateStr) return '-'
+      const parts = dateStr.split('-')
+      if (parts.length >= 2) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des']
+        return `${months[parseInt(parts[1]) - 1]} ${parts[0]}`
+      }
+      return dateStr
+    }
+
+    async function init() {
+      renderSkills()
+      await renderProjects()
+      await renderCertificates()
+      await loadLatestCV()
+      setTimeout(() => {
+        const reveals = document.querySelectorAll('.reveal')
+        const obs = new IntersectionObserver(entries => {
+          entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } })
+        }, { threshold: 0.1 })
+        reveals.forEach(el => obs.observe(el))
+      }, 100)
+    }
+
+    init()
+    document.getElementById('stat-years').innerText = '2+'
+  </script>
+
+  <script>
+    // GROQ API KEY
+    const GROQ_API_KEY = '';
+
+    const DEVELOPER_PROFILE = `
+Kamu adalah asisten AI dari portfolio seorang Web Developer bernama Rifki Figianto.
+Berikut informasi tentang developer ini:
+
+PROFIL:
+- Nama: Rifki Figianto
+- Lokasi: Banjarnegara, Indonesia
+- Status: Open to work, tersedia untuk freelance dan remote
+- Pengalaman: 2+ tahun di bidang web development
+
+KEAHLIAN TEKNIS:
+- Frontend: HTML5, CSS3, JavaScript, TypeScript, React.js, Vue.js, Next.js, Tailwind CSS
+- Backend: Node.js, Express.js, PHP, Laravel, Python, REST API, GraphQL
+- Database: MySQL, PostgreSQL, MongoDB, Redis
+- DevOps: Docker, Git, Linux, Vercel, Firebase
+
+KONTAK:
+- Email: rifkifigianto1@gmail.com
+- WhatsApp: +62 878-7271-5783
+- GitHub: github.com/Rifkifigi
+- LinkedIn: linkedin.com/in/rifkifigianto
+
+INSTRUKSI:
+- Jawab dalam Bahasa Indonesia yang ramah dan profesional
+- Jika ditanya harga/rate freelance, arahkan untuk menghubungi langsung via email/WhatsApp
+- Tetap fokus pada topik terkait developer ini
+- Jawab singkat, padat, dan informatif (maks 3 paragraf)
+`;
+
+    // Chatbot elements
+    const fab = document.getElementById('chat-fab');
+    const win = document.getElementById('chat-window');
+    const closeBtn = document.getElementById('chat-close');
+    const messagesEl = document.getElementById('chat-messages');
+    const inputEl = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send');
+    const suggestionsEl = document.getElementById('chat-suggestions');
+
+    let history = [];
+    let isLoading = false;
+
+    fab.addEventListener('click', () => {
+      const open = win.classList.toggle('open');
+      fab.classList.toggle('open', open);
+      fab.textContent = open ? '✕' : '💬';
+      if (open) inputEl.focus();
+    });
+
+    closeBtn.addEventListener('click', () => {
+      win.classList.remove('open');
+      fab.classList.remove('open');
+      fab.textContent = '💬';
+    });
+
+    inputEl.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    inputEl.addEventListener('input', () => {
+      inputEl.style.height = 'auto';
+      inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
+    });
+
+    window.sendSuggestion = function (btn) {
+      inputEl.value = btn.textContent;
+      suggestionsEl.style.display = 'none';
+      sendMessage();
+    };
+
+    function now() {
+      return new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function appendMessage(role, text) {
+      const div = document.createElement('div');
+      div.className = `msg msg-${role === 'user' ? 'user' : 'bot'}`;
+      div.innerHTML = `<div class="msg-bubble">${text.replace(/\n/g, '<br>')}</div><div class="msg-time">${now()}</div>`;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return div;
+    }
+
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'msg msg-bot msg-typing';
+      div.id = 'typing-indicator';
+      div.innerHTML = `<div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+      messagesEl.appendChild(div);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    }
+
+    function hideTyping() {
+      const t = document.getElementById('typing-indicator');
+      if (t) t.remove();
+    }
+
+    window.sendMessage = async function () {
+      const text = inputEl.value.trim();
+      if (!text || isLoading) return;
+
+      isLoading = true;
+      sendBtn.disabled = true;
+      inputEl.value = '';
+      inputEl.style.height = 'auto';
+      suggestionsEl.style.display = 'none';
+
+      appendMessage('user', text);
+      history.push({ role: 'user', content: text });
+
+      showTyping();
+
+      try {
+        const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${GROQ_API_KEY}`
+          },
+          body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            max_tokens: 500,
+            messages: [
+              { role: 'system', content: DEVELOPER_PROFILE },
+              ...history
+            ]
+          })
+        });
+        const data = await res.json();
+        hideTyping();
+        if (data.error) throw new Error(data.error.message);
+        const reply = data.choices[0].message.content;
+        history.push({ role: 'assistant', content: reply });
+        appendMessage('bot', reply);
+      } catch (err) {
+        hideTyping();
+        appendMessage('bot', '⚠ Maaf, terjadi kesalahan. Silakan coba lagi nanti.');
+        console.error(err);
+      }
+      isLoading = false;
+      sendBtn.disabled = false;
+      inputEl.focus();
+    };
+
+    // Cursor & navbar effects
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px' });
+    function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing) }
+    animRing();
+
+    document.querySelectorAll('a,button,.skill-category,.project-card,.cert-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { cursor.style.width = '16px'; cursor.style.height = '16px'; ring.style.width = '48px'; ring.style.height = '48px' });
+      el.addEventListener('mouseleave', () => { cursor.style.width = '8px'; cursor.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px' });
+    });
+
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60));
+
+    const phrases = ['membangun web apps.', 'coding clean & fast.', 'open to freelance.', 'making ideas real.'];
+    let pi = 0, ci = 0, del = false;
+    const typedEl = document.getElementById('typed-text');
+    function type() {
+      const phrase = phrases[pi];
+      if (!del) { typedEl.textContent = phrase.slice(0, ++ci); if (ci === phrase.length) { del = true; setTimeout(type, 1800); return } }
+      else { typedEl.textContent = phrase.slice(0, --ci); if (ci === 0) { del = false; pi = (pi + 1) % phrases.length } }
+      setTimeout(type, del ? 50 : 90);
+    }
+    setTimeout(type, 1400);
+
+    function submitForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Mengirim...';
+      btn.disabled = true;
+      setTimeout(() => {
+        document.getElementById('form-success').style.display = 'block';
+        e.target.reset();
+        btn.textContent = 'Kirim Pesan';
+        btn.disabled = false;
+        setTimeout(() => document.getElementById('form-success').style.display = 'none', 4000);
+      }, 1200);
+    }
+  </script>
+  <script>
+    const music = document.getElementById('bg-music')
+    const toggle = document.getElementById('music-toggle')
+
+    let playing = false
+
+    music.volume = 0.3
+
+    window.addEventListener('load', async () => {
+
+      try {
+        await music.play()
+        toggle.innerHTML = '⏸'
+        playing = true
+      } catch (e) {
+        console.log('Autoplay diblok browser')
+        toggle.innerHTML = '🎵'
+        playing = false
+      }
+
+    })
+
+    toggle.addEventListener('click', async () => {
+
+      if (!playing) {
+
+        await music.play()
+        toggle.innerHTML = '⏸'
+        playing = true
+
+      } else {
+
+        music.pause()
+        toggle.innerHTML = '🎵'
+        playing = false
+
+      }
+
+    })
+  </script>
+</body>
+
+</html>
